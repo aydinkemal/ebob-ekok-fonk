@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<conio.h>
+
+int ebob(int, int);
+int ekok(int, int);
+void menu();
+void main()
+{
+	int sayi1, sayi2, secim, secim1, sonuc;
+	printf("Birinci sayiyi giriniz: ");
+	scanf_s("%d", &sayi1);
+	printf("Ikinci sayiyi giriniz : ");
+	scanf_s("%d", &sayi2);
+	do{
+		menu();
+		scanf_s("%d", &secim);
+
+		switch (secim)
+		{
+		case 1:
+		{
+				 sonuc = ebob(sayi1, sayi2);
+				 printf("Ebob = %d",sonuc);
+				  break;
+		}
+
+		case 2:
+		{
+				  sonuc = ekok(sayi1, sayi2);
+				  printf("%d,%d sayilarinin ekok degeri %d dir. ", sayi1, sayi2, sonuc);
+				  break;
+		}
+		default:
+			printf("Hatali giriş yaptiniz");
+		}
+	} while (secim == 0);
+
+
+}
+int ebob(int gelenSayi1, int gelenSayi2)
+{
+	int x = 0;
+	for (int i = 2; i <= gelenSayi1; i++)
+	{
+		if (0 == gelenSayi1%i && 0 == gelenSayi2%i)
+		{
+			x = i;
+
+		}
+
+	}
+	return x;
+
+}
+int ekok(int gelenSayi1, int gelenSayi2)
+{
+
+	int a, b, c, ekok = 1, ekokSonuc;
+
+	if (gelenSayi1 > gelenSayi2)
+	{
+		a = gelenSayi1;
+
+	}
+	else a = gelenSayi2;
+
+	for (int i = 2; i <= a; i++)
+	{
+
+		if (0 == gelenSayi1%i && gelenSayi2%i == 0)
+		{
+			gelenSayi1 /= i;
+			gelenSayi2 /= i;
+			ekok *= i;
+			if (gelenSayi1%i==0 && gelenSayi2%i==0 )
+			{	
+				i--;
+			}
+
+		}
+		if (gelenSayi1%i == 0 && gelenSayi2 != 0)
+		{
+			gelenSayi1 /= i;
+			ekok *= i;
+			if (gelenSayi1%i==0)
+			{
+				i--;
+			}
+
+		}
+		if (gelenSayi1%i != 0 && gelenSayi2%i == 0)
+		{
+			gelenSayi2 /= i;
+			ekok *= i;
+			if (gelenSayi2%i==0)
+			{
+				i--;
+			}
+		}
+		ekokSonuc = ekok;
+
+	}
+	
+	return ekokSonuc;
+}
+
+void menu()
+{
+	printf("\n\nGirilen sayilarin;\n\nEbob degerini goruntulemek icin >1<\nEkok degerini goruntulemek icin >2<\nCikmak icin >0< degerini giriniz\n\nDegerini giriniz: ");
+}
